@@ -1,0 +1,77 @@
+<div class="login">
+    <div class="desktop">
+        <div class="txt-desktop">
+            <div>
+                <p>REGISTRATE</p>
+                <p>Y comienza a vender</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex-desktop">
+        <div class="header">
+            <h2>Registro</h2>
+        </div>
+
+        <div class="dFlex">
+            <h2>Registro</h2>
+        </div>
+
+        <div class="box">
+            <form [formGroup]="registry">
+                <div class="flex">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre del negocio</mat-label>
+                        <mat-icon matSuffix appearance="outline">store</mat-icon>
+                        <input autocomplete="off" class="email" name="nombreNegocio" type="text" matInput
+                            placeholder="El rulo verdulería" formControlName="nombreNegocio">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tu nombre</mat-label>
+                        <mat-icon matSuffix appearance="outline">person_outline</mat-icon>
+                        <input autocomplete="off" class="email" name="nombre" type="text" matInput
+                            placeholder="ejemplo@ejemplo.cl" formControlName="nombre">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Número móvil</mat-label>
+                        <mat-icon matSuffix appearance="outline">smartphone</mat-icon>
+                        <input autocomplete="off" class="email" name="numero" type="text" matInput
+                            placeholder="ejemplo@ejemplo.cl" formControlName="numero">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Dirección</mat-label>
+                        <mat-icon matSuffix appearance="outline">contacts</mat-icon>
+                        <input autocomplete="off" class="email" name="direccion" type="text" matInput
+                            placeholder="ejemplo@ejemplo.cl" formControlName="direccion">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <mat-icon matSuffix appearance="outline">email</mat-icon>
+                        <input autocomplete="off" class="email" name="email" type="text" matInput
+                            placeholder="ejemplo@ejemplo.cl" formControlName="email">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <mat-icon (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <input placeholder="********" name="password" autocomplete="off"
+                            [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                    </mat-form-field>
+
+                </div>
+
+                <div class="flex">
+                    <button [disabled]="!registry.valid"
+                        [ngClass]="!registry.valid ? 'btn-disabled': 'btn-enabled'" mat-raised-button
+                        color="accent" type="submit" (click)="onSubmit()">ENVIAR
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+div.flex {
+display: flex;
+justify-content: center;
+align-items: flex-end;
+flex-direction: column;
+}
+.flex_icon{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+.iconError{
+
+}
+
+::ng-deep mat-icon.iconError.mat-icon.notranslate.mat-warn.material-icons{
+font-size: 40px;
+}
+::ng-deep mat-icon.iconError.mat-icon.notranslate.mat-accent.material-icons{
+font-size:40px;
+}
+
+.title{
+padding: 30px 0 0 0;
+}

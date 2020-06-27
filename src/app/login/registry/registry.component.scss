@@ -1,0 +1,100 @@
+@import "../../../assets/sass/import.scss";
+.box {
+  padding: 30px;
+}
+
+.flex{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+button{
+  @include btn;
+  color: #fff;
+}
+.btn-disabled{
+  color: #c1c1c1 !important;
+  background: #ECECEC !important;
+}
+
+.btn-enabled{
+  color: #fff;
+  background: #5DB18C;
+}
+.resetPass{
+  color: #333333;
+  margin-top: 30px;
+  height: 53px;
+}
+
+::ng-deep input#mat-input-0, input#mat-input-1 {
+  color: #333!important;
+}
+
+::ng-deep mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color{
+  color: #5DB18C;
+}
+
+.bottom-msg{
+  background: #f1f1f1;
+  border-radius: 4px;
+  padding: 0 13px;
+  p{
+    color: #333;
+  }
+}
+
+.back{
+  color:white;
+}
+
+.desktop{
+  display: none;
+}
+
+@media (min-width: 1281px) {
+  .login{
+    display: flex;
+    height: 100%;
+  }
+  .header{
+    display: none;
+  }
+  .flex-desktop{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .desktop{
+    display: block;
+    height: 100%;
+    width: 50%;
+    background: #5DB18C;
+    div.txt-desktop{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      p:nth-child(2){
+        font-weight: lighter;
+        font-size: 20px;
+        color: #fff!important;
+      }
+      p:nth-child(1){
+        font-weight: bold;
+        font-size: 30px;
+        color: #fff!important;
+      }
+      p{
+        margin: 0;
+        padding: 10px;
+      }
+    }
+
+  }
+}
