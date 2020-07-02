@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SnackBarService } from '../services/local/snack-bar.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../shared/shared/modal/modal.component';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 
 @Component({

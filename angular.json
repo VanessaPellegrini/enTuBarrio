@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "enTuBarrio"
+    }
+  },
+  "defaultProject": "enTuBarrio",
+  "cli": {
+    "analytics": "741086fa-cdc3-4558-8cf0-f8e25ce3af62"
+  }
 }

@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -25,7 +25,7 @@ import { environment } from 'src/environments/environment';
     MaterialModule,
     LoginModule
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

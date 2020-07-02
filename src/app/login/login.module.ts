@@ -8,7 +8,7 @@ import * as firebase from "firebase/app";
 import 'firebase/auth';
 import 'firebase/firestore';
 import {environment} from "../../environments/environment";
-import { SharedModule } from '../shared/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { RegistryComponent } from './registry/registry.component';
 
 if (!firebase.apps.length) {
