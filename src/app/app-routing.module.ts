@@ -7,8 +7,23 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', loadChildren: 'src/app/login/login.module#LoginModule' },
   {
-    path: 'dashboard',
-    loadChildren: () => import(`src/app/dashboard/dashboard.module`).then(m => m.DashboardModule),
+    path: 'pedidos',
+    loadChildren: () => import(`src/app/orders/orders.module`).then(m => m.OrdersModule),
+    canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import(`src/app/historical/historical.module`).then(m => m.HistoricalModule),
+    canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'usuario',
+    loadChildren: () => import(`src/app/user/user.module`).then(m => m.UserModule),
+    canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'productos',
+    loadChildren: () => import(`src/app/stock/stock.module`).then(m => m.StockModule),
     canActivate: [AngularFireAuthGuard]
   },
 ];

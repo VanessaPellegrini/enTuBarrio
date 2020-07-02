@@ -3,9 +3,9 @@
     [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened]="!(isHandset | async)!.matches">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a href=""></a>
+      <a mat-list-item href="#">Mi Stock</a>
+      <a mat-list-item href="#">Historial</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -15,11 +15,12 @@
         </mat-icon>
       </button>
       <span>En tu barrio</span>
-      <span class="spacer"></span>
-      <a href="#">Mi Stock</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-      <button>
+
+      <button class="btn" mat-icon-button (click)=toOrders()> <mat-icon>shopping_basket</mat-icon> Pedidos</button>
+      <button class="btn"  mat-icon-button (click)=toHistorical()><mat-icon>menu_book</mat-icon>  Historial</button>
+      <button class="btn"  mat-icon-button (click)=toStock()><mat-icon>store</mat-icon>  Productos</button>
+      <button class="btn"  mat-icon-button (click)=toUser()><mat-icon>person</mat-icon> Usuario </button>
+      <button mat-icon-button >
         <p>SALIR <mat-icon (click)="logOut()">exit_to_app</mat-icon></p>
       </button>
     </mat-toolbar>

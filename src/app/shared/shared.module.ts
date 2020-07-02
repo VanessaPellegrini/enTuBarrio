@@ -8,12 +8,14 @@ import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, HeaderComponent],
+  declarations: [ModalComponent,
+  HeaderComponent],
   imports: [
     CommonModule,
     MaterialModule
   ],
   entryComponents: [ModalComponent, ],
-  exports: [ModalComponent, HeaderComponent],
+  exports: [ModalComponent,
+    HeaderComponent],
 })
 export class SharedModule { }

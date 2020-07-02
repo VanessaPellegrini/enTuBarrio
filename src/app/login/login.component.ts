@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.signIn(this.email.value.toLowerCase(), this.password.value);
-        //this._router.navigateByUrl('dashboard');
     }
 
     signIn(email: string, pass: string) {
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit {
             .signInWithEmailAndPassword(email, pass)
             .then(res => {
                 console.log(res);
-                this._router.navigateByUrl('dashboard');
+                this._router.navigateByUrl('pedidos');
             })
             .catch(error => {
                 throw error

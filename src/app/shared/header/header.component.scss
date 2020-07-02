@@ -12,10 +12,6 @@
   display: none;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
 mat-toolbar a {
   display: inline-block;
   margin: 0 10px;
@@ -28,3 +24,7 @@ mat-toolbar a {
     display: none;
   }
 } */
+
+.btn{
+  margin-right: 48px;
+}

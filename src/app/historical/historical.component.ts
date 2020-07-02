@@ -2,7 +2,7 @@ import { Component, ViewChild, ChangeDetectorRef, AfterViewChecked } from '@angu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 export interface Pedido {
   id?: number;
@@ -12,20 +12,23 @@ export interface Pedido {
   nombre_cliente?: string;
   telefono_cliente?: string;
   total?: number;
+  aceptacion?:string;
 }
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  selector: 'app-historical',
+  templateUrl: './historical.component.html',
+  styleUrls: ['./historical.component.scss']
 })
-export class OrdersComponent implements AfterViewChecked {
+export class HistoricalComponent implements AfterViewChecked {
+
   displayedColumns: string[] = [
     'id', 
     'fecha', 
     'nombre_cliente', 
     'cant_items', 
     'total',
+    'aceptacion',
     'estado_pedido'
   ];
   dataSource: MatTableDataSource<Pedido>;
@@ -38,7 +41,8 @@ export class OrdersComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.firestore.collection<any>('pedidos').valueChanges().subscribe(
+    this.firestore.collection<any>('pedidos', ref => ref 
+    .where('estado_pedido', '==', 'ENTREGADO')).valueChanges().subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
@@ -57,5 +61,3 @@ export class OrdersComponent implements AfterViewChecked {
     }
   }
 }
-
-

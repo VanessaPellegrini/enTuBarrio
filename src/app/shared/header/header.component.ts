@@ -19,6 +19,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  toUser(){
+    this._router.navigateByUrl('usuario');
+  }
+  toHistorical(){
+    this._router.navigateByUrl('historial');
+  }
+  toOrders(){
+    this._router.navigateByUrl('pedidos');
+  }
+
+  toStock(){
+    this._router.navigateByUrl('productos');
+  }
 
   logOut() {
     this._router.navigateByUrl('');
