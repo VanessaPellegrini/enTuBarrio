@@ -7,7 +7,7 @@
 
 .header {
     grid-area: header;
-    background-color: #0097fb;
+    background-color: #DF7500;
   }
   
   .grid-container {
@@ -18,7 +18,7 @@
       'header'
       'main'
       'footer';
-    height: 100vh;
+    height: 94vh;
   }
   
   /*main*/
@@ -38,7 +38,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #38B6E4;
+    background-color: #FBC102;
     margin-bottom: 20px;
     -webkit-column-break-inside: avoid;
     padding: 24px;
@@ -64,7 +64,7 @@
     padding: 20px;
     height: 150px;
     background-color: #e3e4e6;
-    color: #21C4F3;
+    color: #FBC102;
   }
   
   /*mini cards*/
@@ -104,3 +104,7 @@
   ::ng-deep app-campaign-result{
     width: 100%;
   }
+h2{
+  padding: 10px;
+  color: white;
+}

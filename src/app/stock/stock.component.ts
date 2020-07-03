@@ -22,7 +22,7 @@ https://fireship.io/lessons/reactive-crud-app-with-angular-and-firebase-tutorial
   styleUrls: ['./stock.component.scss']
 })
 export class StockComponent implements OnInit {
-  title= "Productos";
+  title= "Sección Mis Productos";
   description = "Administra tus productos";
   currentYear = new Date().getFullYear();
 
