@@ -1,0 +1,19 @@
+<div *ngIf="product">
+    <div>
+      <label>Nombre del producto: </label> {{product.nombre}}
+    </div>
+    <div>
+      <label>Cantidad: </label> {{product.cantidad}}
+    </div>
+    <div>
+      <label>Active: </label> {{product.activo}}
+    </div>
+   
+    <span class="button is-small btn-primary" *ngIf='product.activo' (click)='updateActive(false)'>Inactivo</span>
+   
+    <span class="button is-small btn-primary" *ngIf='!product.activo' (click)='updateActive(true)'>Activo</span>
+   
+    <span class="button is-small btn-danger" (click)='deleteProduct()'>Delete</span>
+   
+    <hr />
+  </div>

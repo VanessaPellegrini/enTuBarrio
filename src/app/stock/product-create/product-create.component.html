@@ -1,0 +1,21 @@
+<h3>Ingresar nuevo producto</h3>
+<div [hidden]="submitted" style="width: 300px;">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">nombre</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="product.nombre" name="nombre">
+      </div>
+   
+      <div class="form-group">
+        <label for="age">cantidad</label>
+        <input type="text" class="form-control" id="cantidad" required [(ngModel)]="product.cantidad" name="cantidad">
+      </div>
+   
+      <button type="submit" class="btn btn-success">Enviar</button>
+    </form>
+  </div>
+   
+  <div [hidden]="!submitted">
+    <h4>Agregado correctamente</h4>
+    <button class="btn btn-success" (click)="newProduct()">Agregar</button>
+  </div>
