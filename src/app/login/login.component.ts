@@ -5,7 +5,18 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { SnackBarService } from '../services/local/snack-bar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../shared/modal/modal.component';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import {map} from 'rxjs/operators';
+import { LoaderService } from '../shared/loader/loader.service';
 
+export interface UserInterface{
+    direccion:string,
+    email: string,
+    nombre:string,
+    nombre_negocio?:string,
+    numero:string,
+    tipo:string
+} 
 
 @Component({
     selector: 'app-login',
@@ -16,6 +27,10 @@ import { ModalComponent } from '../shared/modal/modal.component';
 export class LoginComponent implements OnInit {
 
     userSuscription$;
+    public dataUser: UserInterface[] = [];
+
+    userEmail;
+    tipoUser;
 
     loginValidateForm: FormGroup;
     email: FormControl;
@@ -35,6 +50,8 @@ export class LoginComponent implements OnInit {
         private auth: AngularFireAuth,
         public _snack: SnackBarService,
         public dialog: MatDialog,
+        private _af: AngularFirestore,
+        private _loaderService: LoaderService,
     ) {
         this.email = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\\.[a-zA-Z]{2,4}$')]);
         this.password = new FormControl('', [Validators.required]);
@@ -48,6 +65,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
+        this._loaderService.display(true);
         this.signIn(this.email.value.toLowerCase(), this.password.value);
     }
 
@@ -79,16 +97,34 @@ export class LoginComponent implements OnInit {
     signIn(email: string, pass: string) {
         this.auth
             .signInWithEmailAndPassword(email, pass)
-            .then(res => {
-                console.log(res);
-                this._router.navigateByUrl('pedidos');
+            .then(() => {
+                this._af.collection('usuario', ref => ref
+                .where('email', '==',this.loginValidateForm.value.email ))
+                .valueChanges().pipe(
+                    map((user:UserInterface[]) => {
+                        this.dataUser = user;
+                        if(user[0].email){
+                            this.tipoUser = user[0].tipo;
+                            localStorage.setItem('email', this.userEmail )
+                            if(this.tipoUser = 'cliente'){
+                                this._router.navigateByUrl('usuario');
+                            }else{
+                                this._router.navigateByUrl('pedidos');
+                            }
+                        }
+                    })
+                ).subscribe(),
+                err => console.log(err);
+                this._loaderService.display(false);
             })
             .catch(error => {
-                //throw error
-                //this._loaderService.display(false);
+                //
+                this._loaderService.display(false);
                 this.openDialog('datosInvalidos');
+                throw error
             }
         );
+        
     }
 
     resetPassword() {

@@ -12,6 +12,11 @@ import { LoginModule } from './login/login.module';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { LoaderService } from './shared/loader/loader.service';
+import { SharedModule } from './shared/shared.module';
+
+//loader
+
 
 @NgModule({
   declarations: [
@@ -23,7 +28,11 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    LoginModule
+    LoginModule,
+    SharedModule
+  ],
+  providers:[
+    LoaderService
   ],
 
   bootstrap: [AppComponent]

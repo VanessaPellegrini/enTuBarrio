@@ -4,18 +4,19 @@ import { ModalComponent } from './modal/modal.component';
 
 import { MaterialModule } from '../material/material.module';
 import { HeaderComponent } from './header/header.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 
 @NgModule({
   declarations: [ModalComponent,
-  HeaderComponent],
+  HeaderComponent, LoaderComponent],
   imports: [
     CommonModule,
     MaterialModule
   ],
   entryComponents: [ModalComponent, ],
   exports: [ModalComponent,
-    HeaderComponent],
+    HeaderComponent, LoaderComponent],
 })
 export class SharedModule { }

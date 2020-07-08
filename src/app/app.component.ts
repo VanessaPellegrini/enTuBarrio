@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './shared/loader/loader.service';
 
 
 @Component({
@@ -7,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  showLoader: boolean;
   title = 'enTuBarrio';
+  constructor(private _loaderService:LoaderService){
+    this._loaderService.status.subscribe((val: boolean) => {
+      this.showLoader = val;
+    })
+  }
 }
