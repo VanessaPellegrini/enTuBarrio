@@ -1,6 +1,7 @@
 {
   "hosting": {
-    "public": "/dist",
+    "site": "en-tu-barrio",
+    "public": "dist/enTuBarrio",
     "ignore": [
       "firebase.json",
       "**/.*",

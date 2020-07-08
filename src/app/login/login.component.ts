@@ -51,43 +51,6 @@ export class LoginComponent implements OnInit {
         this.signIn(this.email.value.toLowerCase(), this.password.value);
     }
 
-    signIn(email: string, pass: string) {
-        this.auth
-            .signInWithEmailAndPassword(email, pass)
-            .then(res => {
-                console.log(res);
-                this._router.navigateByUrl('pedidos');
-            })
-            .catch(error => {
-                throw error
-                //this._loaderService.display(false);
-                //this.openDialog('datosInvalidos');
-            }
-        );
-    }
-
-
-
-    resetPassword() {
-        if (this.email.value) {
-            this.auth.sendPasswordResetEmail(this.email.value.toLowerCase()).then(
-                () => this._snack.openSnackBar('Te hemos enviado un correo a tu email registrado, por favor cambia tu contraseña')
-            ).catch((err) => {
-                if (err.code === 'auth/too-many-requests') {
-                    this.openDialog('too-many-requests');
-                } else {
-                    this.openDialog('errorEnvio');
-                }
-            });
-        } else {
-            this.emailVacio = true;
-        }
-    }
-
-    toRegistry() {
-        this._router.navigateByUrl('registro');
-    }
-
     async openDialog(msgType: string) {
         if (msgType === 'datosInvalidos') {
             this.iconColor = 'warn';
@@ -111,6 +74,41 @@ export class LoginComponent implements OnInit {
             width: '250px',
             data: { title: this.titleModal, message: this.messageModal, icon: this.icon, colorIcon: this.iconColor }
         });
+    }
+
+    signIn(email: string, pass: string) {
+        this.auth
+            .signInWithEmailAndPassword(email, pass)
+            .then(res => {
+                console.log(res);
+                this._router.navigateByUrl('pedidos');
+            })
+            .catch(error => {
+                //throw error
+                //this._loaderService.display(false);
+                this.openDialog('datosInvalidos');
+            }
+        );
+    }
+
+    resetPassword() {
+        if (this.email.value) {
+            this.auth.sendPasswordResetEmail(this.email.value.toLowerCase()).then(
+                () => this._snack.openSnackBar('Te hemos enviado un correo a tu email registrado, por favor cambia tu contraseña')
+            ).catch((err) => {
+                if (err.code === 'auth/too-many-requests') {
+                    this.openDialog('too-many-requests');
+                } else {
+                    this.openDialog('errorEnvio');
+                }
+            });
+        } else {
+            this.emailVacio = true;
+        }
+    }
+
+    toRegistry() {
+        this._router.navigateByUrl('registro');
     }
 
 }

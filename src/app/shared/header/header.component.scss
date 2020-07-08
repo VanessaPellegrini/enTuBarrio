@@ -25,6 +25,13 @@ mat-toolbar a {
   }
 } */
 
-.btn{
-  margin-right: 48px;
+::ng-deep mat-toolbar.mat-toolbar.mat-primary.mat-toolbar-single-row {
+  display: flex;
+  justify-content: space-between;
+  div{
+    padding:0 30px;
+    button{
+      padding: 5px;
+    }
+  }
 }

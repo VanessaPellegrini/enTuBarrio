@@ -16,11 +16,53 @@
             <h2>Registro</h2>
         </div>
 
-        <div class="box">
+        <div class="box" *ngIf="!registryOk">
             <form [formGroup]="registry">
                 <div class="flex">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <mat-icon matSuffix appearance="outline">email</mat-icon>
+                        <input autocomplete="off" class="email" name="email" type="text" matInput
+                            placeholder="ejemplo@ejemplo.cl" formControlName="email" required>
+                    </mat-form-field>
 
                     <mat-form-field appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <mat-icon (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <input placeholder="********" name="password" autocomplete="off"
+                            [type]="hide ? 'password' : 'text'" matInput formControlName="password" required>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="flex">
+                    <button [disabled]="!registry.valid" [ngClass]="!registry.valid ? 'btn-disabled': 'btn-enabled'"
+                        mat-raised-button color="accent" type="submit" (click)="onSubmit()">ENVIAR
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="box" *ngIf="registryOk">
+            <form [formGroup]="userData">
+                <div class="flex">
+
+                    <div>
+                        <label>Tipo de usuario</label>
+                        <br>
+                        <br>
+                        <mat-radio-group formControlName="tipo" required>
+                            <mat-radio-button value="cliente">Cliente</mat-radio-button>
+                            <br>
+                            <br>
+                            <mat-radio-button value="pyme">Pyme o emprendedor</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <br>
+                    <br>
+
+                    <mat-form-field appearance="outline" *ngIf="registry.value.tipo == 'pyme'">
                         <mat-label>Nombre del negocio</mat-label>
                         <mat-icon matSuffix appearance="outline">store</mat-icon>
                         <input autocomplete="off" class="email" name="nombreNegocio" type="text" matInput
@@ -31,47 +73,38 @@
                         <mat-label>Tu nombre</mat-label>
                         <mat-icon matSuffix appearance="outline">person_outline</mat-icon>
                         <input autocomplete="off" class="email" name="nombre" type="text" matInput
-                            placeholder="ejemplo@ejemplo.cl" formControlName="nombre">
+                            placeholder="ejemplo@ejemplo.cl" formControlName="nombre" required>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Número móvil</mat-label>
                         <mat-icon matSuffix appearance="outline">smartphone</mat-icon>
-                        <input autocomplete="off" class="email" name="numero" type="text" matInput
-                            placeholder="ejemplo@ejemplo.cl" formControlName="numero">
+                        <input autocomplete="off" class="email" name="numero" type="number" matInput
+                            placeholder="ejemplo@ejemplo.cl" formControlName="numero" required>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Dirección</mat-label>
                         <mat-icon matSuffix appearance="outline">contacts</mat-icon>
                         <input autocomplete="off" class="email" name="direccion" type="text" matInput
-                            placeholder="ejemplo@ejemplo.cl" formControlName="direccion">
+                            placeholder="ejemplo@ejemplo.cl" formControlName="direccion" required>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
                         <mat-icon matSuffix appearance="outline">email</mat-icon>
                         <input autocomplete="off" class="email" name="email" type="text" matInput
-                            placeholder="ejemplo@ejemplo.cl" formControlName="email">
+                            placeholder="ejemplo@ejemplo.cl" formControlName="email" required>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Contraseña</mat-label>
-                        <mat-icon (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        <input placeholder="********" name="password" autocomplete="off"
-                            [type]="hide ? 'password' : 'text'" matInput formControlName="password">
-                    </mat-form-field>
+                    <div class="flex">
+                        <button [disabled]="!userData.valid" [ngClass]="!userData.valid ? 'btn-disabled': 'btn-enabled'"
+                            mat-raised-button color="accent" type="submit" (click)="onSubmitUserData()">ENVIAR
+                        </button>
+                    </div>
 
-                </div>
-
-                <div class="flex">
-                    <button [disabled]="!registry.valid"
-                        [ngClass]="!registry.valid ? 'btn-disabled': 'btn-enabled'" mat-raised-button
-                        color="accent" type="submit" (click)="onSubmit()">ENVIAR
-                    </button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
