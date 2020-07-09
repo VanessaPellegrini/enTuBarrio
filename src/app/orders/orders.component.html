@@ -17,7 +17,7 @@
                 <!-- Progress Column -->
                 <ng-container matColumnDef="fecha">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                    <td mat-cell *matCellDef="let row"> {{row.fecha.toDate()}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.fecha.toDate() | date :'h:mm:ss dd-MMM-yy'}} </td>
                 </ng-container>
 
                 <!-- Name Column -->

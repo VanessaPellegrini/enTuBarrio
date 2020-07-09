@@ -5,4 +5,6 @@ export class Product{
     precio:number;
     activo:boolean;
     key:string;
+    img?:string;
+    alt_img?:string;
 }

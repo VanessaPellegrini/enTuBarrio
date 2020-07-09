@@ -53,13 +53,17 @@ button{
   display: none;
 }
 
+.dFlex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 @media (min-width: 1281px) {
   .login{
     display: flex;
     height: 100%;
-  }
-  .header{
-    display: none;
   }
   .flex-desktop{
     display: flex;

@@ -106,16 +106,17 @@ export class LoginComponent implements OnInit {
                         if(user[0].email){
                             this.tipoUser = user[0].tipo;
                             localStorage.setItem('email', this.userEmail )
-                            if(this.tipoUser = 'cliente'){
+                            localStorage.setItem('nombre', user[0].nombre)
+                            if(this.tipoUser === 'cliente'){
                                 this._router.navigateByUrl('usuario');
                             }else{
                                 this._router.navigateByUrl('pedidos');
                             }
+                            this._loaderService.display(false);
                         }
                     })
                 ).subscribe(),
                 err => console.log(err);
-                this._loaderService.display(false);
             })
             .catch(error => {
                 //

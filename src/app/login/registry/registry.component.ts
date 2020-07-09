@@ -4,10 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
-//registrar correo
-//registrar contraseña
-
-//registrar otros datos
+//TODO localstorage email
 
 export class userData {
   tipo_usuario: string;
