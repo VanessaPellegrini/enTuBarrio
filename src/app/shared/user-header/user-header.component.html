@@ -1,17 +1,17 @@
-<header class="header-user">
+<mat-toolbar color="primary">
     <div>
-        <a routerLink="/usuario" style="margin-right: 20px;" mat-raised-button>
+        <a routerLink="/usuario" style="margin-right: 20px;" mat-button>
             Productos
         </a>
     </div>
     <div>
-        <a routerLink="/orden" style="margin-right: 20px;" mat-raised-button [matBadge]="total$ | async"
+        <a routerLink="/orden" style="margin-right: 20px;" color="accent" mat-raised-button [matBadge]="total$ | async"
             matBadgeColor="warn">
             <mat-icon>shopping_cart</mat-icon>
             Carrito
         </a>
-        <a mat-raised-button matTooltip="SALIR DE LA APP" aria-label="Salir de la app">
+        <a mat-button matTooltip="SALIR DE LA APP" aria-label="Salir de la app">
             <mat-icon (click)="logOut()">exit_to_app</mat-icon>
         </a>
     </div>
-</header>
+</mat-toolbar>

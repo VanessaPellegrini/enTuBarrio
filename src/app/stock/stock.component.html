@@ -1,12 +1,12 @@
-<app-header>
-  <div class="grid-container">
-    <header class="header">
-      <h2>{{title}}</h2>
-      <h3>{{description}}</h3>
-    </header>
+<app-header></app-header>
+<div class="grid-container">
+  <header class="header">
+    <h2>{{title}}</h2>
+    <h3>{{description}}</h3>
+  </header>
 
-    <div class="main">
-      <!-- <div class="main-header">
+  <div class="main">
+    <!-- <div class="main-header">
             <div class="main-header__heading">Hello User</div>
             <div class="main-header__updates">Recent Items</div>
         </div> 
@@ -28,26 +28,26 @@
                 <div class="overviewcard__info">Card</div>
             </div>
         </div>-->
-      <div class="main-box">
-        <div class="cardoverview">
-          <div class="card">
-            <!--  <a routerLink="listado" class="btn btn-primary active" role="button" routerLinkActive="active">Listado</a>-->
-            <app-product-list></app-product-list>
-          </div>
-          <div class="card">
-            <!--  <a routerLink="agregar" class="btn btn-primary active" role="button" routerLinkActive="active">Agregar</a>-->
-            <app-product-create></app-product-create>
-          </div>
+    <div class="main-box">
+      <div class="cardoverview">
+        <div class="card">
+          <!--  <a routerLink="listado" class="btn btn-primary active" role="button" routerLinkActive="active">Listado</a>-->
+          <app-product-list></app-product-list>
+        </div>
+        <div class="card">
+          <!--  <a routerLink="agregar" class="btn btn-primary active" role="button" routerLinkActive="active">Agregar</a>-->
+          <app-product-create></app-product-create>
         </div>
       </div>
     </div>
-    <router-outlet></router-outlet>
-    <footer class="footer">
-      <div class="footer__copyright">&copy; {{currentYear}}</div>
-      <div class="footer__signature"></div>
-    </footer>
   </div>
-</app-header>
+  <router-outlet></router-outlet>
+  <footer class="footer">
+    <div class="footer__copyright">&copy; {{currentYear}}</div>
+    <div class="footer__signature"></div>
+  </footer>
+</div>
+
 
 <!-- 
     <nav>

@@ -1,38 +1,18 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" [ngClass]="{hidden: !(isHandset | async)!.matches}" fixedInViewport="false"
-    [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
-    [opened]="!(isHandset | async)!.matches">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list>
-      <a href=""></a>
-      <a mat-list-item href="#">Mi Stock</a>
-      <a mat-list-item href="#">Historial</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="(isHandset | async)!.matches">
-        <mat-icon aria-label="Side nav toggle icon">menu
-        </mat-icon>
-      </button>
-      <span>En tu barrio</span>
-      <div>
-        <button class="btn" mat-button (click)=toOrders()>
-          <mat-icon>shopping_basket</mat-icon> Pedidos
-        </button>
-        <button class="btn" mat-button (click)=toHistorical()>
-          <mat-icon>menu_book</mat-icon> Historial
-        </button>
-        <button class="btn" mat-button (click)=toStock()>
-          <mat-icon>store</mat-icon> Productos
-        </button>
-        <!--  <button class="btn"  mat-icon-button (click)=toUser()><mat-icon>person</mat-icon> Usuario </button>-->
-        <button mat-button>
-          <mat-icon (click)="logOut()">exit_to_app</mat-icon>SALIR 
-        </button>
-      </div>
-    </mat-toolbar>
-    <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<mat-toolbar color="primary">
+  <span>En tu barrio</span>
+  <div>
+    <a class="btn" mat-button routerLink="/pedidos">
+      <mat-icon>shopping_basket</mat-icon> Pedidos
+    </a>
+    <a class="btn" mat-button routerLink="/historial">
+      <mat-icon>menu_book</mat-icon> Historial
+    </a>
+    <a class="btn" mat-button routerLink="/productos">
+      <mat-icon>store</mat-icon> Productos
+    </a>
+    <!--  <button class="btn"  mat-icon-button (click)=toUser()><mat-icon>person</mat-icon> Usuario </button>-->
+    <button mat-button matTooltip="SALIR DE LA APP" (click)="logOut()">
+      <mat-icon >exit_to_app</mat-icon>SALIR
+    </button>
+  </div>
+</mat-toolbar>

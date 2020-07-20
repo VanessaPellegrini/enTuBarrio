@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     StockRoutingModule,
     SharedModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class StockModule { }

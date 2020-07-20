@@ -19,9 +19,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  toUser(){
-    this._router.navigateByUrl('usuario');
-  }
+  
   toHistorical(){
     this._router.navigateByUrl('historial');
   }
