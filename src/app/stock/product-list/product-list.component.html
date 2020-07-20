@@ -1,7 +1,14 @@
-<h1>Lista de productos</h1>
-<div *ngFor="let product of products" style="width: 300px;">
-  <app-product-detail [product]='product'></app-product-detail>
+<div class="title">
+  <h2>Lista de productos</h2>
+  <button mat-flat-button color="warn" type="button" class="button btn-danger" (click)='deleteProduct()'>Eliminar
+    todos</button>
 </div>
+<div class="main-box">
+  <div *ngFor="let product of products" style="width: 300px;" class="card">
+    <app-product-detail [product]='product'></app-product-detail>
+  </div>
+</div>
+
 <div style="margin-top:20px;">
-  <button mat-flat-button color="warn" type="button" class="button btn-danger" (click)='deleteProduct()'>Eliminar todos</button>
+
 </div>

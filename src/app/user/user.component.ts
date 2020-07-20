@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Product } from '../model/product.model';
 import { map } from 'rxjs/operators';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { CartService } from '../services/cart.service';
+import { ProductService } from '../services/product.service';
 
 //TODO arreglar item carrito
 
@@ -15,9 +17,10 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  currentYear = new Date().getFullYear();
   products: any;
   userName: any;
+
+  //@Output() productClicked: EventEmitter;
 
   cantidad : FormGroup = new FormGroup({
     itemCantidad: new FormControl('', [Validators.required])
@@ -26,7 +29,8 @@ export class UserComponent implements OnInit {
   constructor(
     private _router: Router,
     public auth: AngularFireAuth,
-    public _af: AngularFirestore
+    private productService:ProductService,
+    private cartService: CartService
   ) {
     this.userName = localStorage.getItem('nombre');
     console.log(this.userName);
@@ -44,7 +48,7 @@ export class UserComponent implements OnInit {
   }
 
   getProductList() {
-    this._af.collection<Product>('producto').snapshotChanges().pipe(
+    this.productService.getProductList().snapshotChanges().pipe(
       map(changes =>
         changes.map(
           c => ({ key: c.payload.doc.id, ...c.payload.doc.data() })
@@ -54,15 +58,11 @@ export class UserComponent implements OnInit {
     })
   }
 
-  logOut() {
-    this._router.navigateByUrl('');
-    this.auth.signOut()
-      .then(() => localStorage.clear())
-      //TODO arreglar bug observable
-      .then(() => window.location.reload())
-      .catch((err) => {
-        throw (err)
-      });
+  addCart(){
+    console.log('agregar al carrito');
+    this.cartService.addCart(this.products)
+    //this.productClicked.emit(this.products.id);
   }
+
 
 }

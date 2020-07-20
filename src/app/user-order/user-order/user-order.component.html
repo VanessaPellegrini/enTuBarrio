@@ -1,0 +1,54 @@
+<div class="grid-container">
+    <app-user-header></app-user-header>
+    <div class="main">
+        <div class="main-header">
+            <!-- 
+            <div class="main-header__heading">Hello User</div>
+            <div class="main-header__updates">Recent Items</div> -->
+        </div>
+        <div class="main-overview">
+
+            <!--  
+            <div class="overviewcard">
+                <div class="overviewcard__icon">Overview</div>
+                <div class="overviewcard__info">Card</div>
+            </div>-->
+        </div>
+        <div class="main-box">
+            <div class="cardoverview">
+
+            </div>
+        </div>
+        <div *ngIf="(products$ | async | groupProducts) as products">
+            <p *ngIf="products.length === 0"> no hay productos</p>
+            <div class="row" *ngFor="let product of products">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Nombre:</th>
+                        <th>Descripcion:</th>
+                        <th>Cantidad:</th>
+                        <th>Total:</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td> <img style="width: 150px;" src="{{product.img}}" alt="{{product.alt_img}}"></td>
+                        <td>{{product.nombre}}</td>
+                        <td>{{product.descripcion}}</td>
+                        <td>{{product.cantidad }}</td>
+                        <td>${{product.total}}</td>
+                        <td>
+                            <button mat-icon-button (click)="deleteProduct(product)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <th></th>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

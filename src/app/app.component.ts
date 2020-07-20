@@ -16,4 +16,9 @@ export class AppComponent {
       this.showLoader = val;
     })
   }
+
+  /*clickProduct(id:number){
+    console.log('product');
+    console.log(id);
+  }*/
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ProductService } from 'src/app/services/product.service';
+import { LoaderService } from 'src/app/shared/loader/loader.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,9 +13,10 @@ export class ProductListComponent implements OnInit {
   products:any;
   currentYear = new Date().getFullYear();
 
-  constructor( private productService:ProductService) { }
+  constructor( private productService:ProductService) {}
 
   ngOnInit(): void {
+    
     this.getProductList();
   }
 

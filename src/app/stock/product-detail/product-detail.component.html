@@ -1,25 +1,38 @@
-<div *ngIf="product">
+<mat-card *ngIf="product">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{product.nombre}}</mat-card-title>
+    <!--   <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+  </mat-card-header>
+  <!-- img -->
+  <img mat-card-image src="{{product.img}}" alt="{{product.alt_img}}">
+  <mat-card-content>
     <div>
-      <label>Nombre del producto: </label> {{product.nombre}}
+      <label class="bolder">Cantidad: </label> {{product.cantidad}}
     </div>
     <div>
-      <label>Cantidad: </label> {{product.cantidad}}
+      <label class="bolder">Descripcion: </label> {{product.descripcion}}
     </div>
     <div>
-      <label>Cantidad: </label> {{product.descripcion}}
+      <label class="bolder">Precio: </label> ${{product.precio}}
     </div>
     <div>
-      <label>Cantidad: </label> ${{product.precio}}
+      <label class="bolder">Activo: </label> {{product.activo}}
     </div>
-    <div>
-      <label>Activo: </label> {{product.activo}}
-    </div>
-   
-    <button style="margin-right: 20px;" mat-flat-button color="accent" class="button is-small btn-primary" *ngIf='product.activo' (click)='updateActive(false)'>Inactivo</button>
-   
-    <button style="margin-right: 20px;" mat-flat-button color="primary" class="button is-small btn-primary" *ngIf='!product.activo' (click)='updateActive(true)'>Activo</button>
-   
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button style="margin-right: 20px;" mat-flat-button color="accent" class="button is-small btn-primary"
+      *ngIf='product.activo' (click)='updateActive(false)'>Inactivo</button>
+
+    <button style="margin-right: 20px;" mat-flat-button color="primary" class="button is-small btn-primary"
+      *ngIf='!product.activo' (click)='updateActive(true)'>Activo</button>
+
     <button mat-flat-button color="warn" class="button is-small btn-danger" (click)='deleteProduct()'>Eliminar</button>
-   
-    <hr />
-  </div>
+  </mat-card-actions>
+
+
+</mat-card>
+
+<br>
+<br>

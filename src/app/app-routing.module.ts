@@ -22,6 +22,10 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard]
   },
   {
+    path: 'orden',
+    loadChildren: () => import(`src/app/user-order/user-order.module`).then(m => m.UserOrderModule)
+  },
+  {
     path: 'productos',
     loadChildren: () => import(`src/app/stock/stock.module`).then(m => m.StockModule),
     canActivate: [AngularFireAuthGuard]

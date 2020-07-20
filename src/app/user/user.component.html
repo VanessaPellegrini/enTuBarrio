@@ -1,62 +1,22 @@
 <div class="grid-container">
-    <header class="header">
-        <div>
-            <h2>Bienveni@ {{userName}}</h2>
-        </div>
-        <div>
-            <button mat-raised-button matTooltip="SALIR DE LA APP" aria-label="Salir de la app">
-                <mat-icon (click)="logOut()">exit_to_app</mat-icon>
-            </button>
-        </div>
-    </header>
-
+    <app-user-header></app-user-header>
     <div class="main">
         <div class="main-header">
+
             <!-- 
             <div class="main-header__heading">Hello User</div>
             <div class="main-header__updates">Recent Items</div> -->
         </div>
         <div class="main-overview">
-            <mat-card class="example-card" *ngFor="let product of products">
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{product.nombre}}</mat-card-title>
-                    <!--   <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
-                </mat-card-header>
-                <!-- img -->
-                <img mat-card-image src="{{product.img}}" alt="{{product.alt_img}}">
-                <mat-card-content>
-                    <p>
-                        {{product.descripcion}}
-                    </p>
-                    <div class="overviewcard__info">
-                        <h2><span class="bolder">Precio:</span>${{product.precio}}</h2>
-                    </div>
-                </mat-card-content>
-                <mat-card-actions>
-                    <form [formGroup]="cantidad">
-                        <input type="number" name="" id="" formControlName="itemCantidad" min="0" max="{{product.cantidad}}" maxlength="{{product.cantidad}}">
-                        <button [disabled]="!cantidad.valid"
-                            [ngClass]="!cantidad.valid ? 'btn-disabled': 'btn-enabled'" mat-raised-button
-                            color="accent" type="submit" (click)="onSubmit()">Agregar al carrito <mat-icon (click)="logOut()">shopping_cart</mat-icon>
-                        </button>
-                    </form>
-                </mat-card-actions>
-            </mat-card>
             <!--  
             <div class="overviewcard">
                 <div class="overviewcard__icon">Overview</div>
                 <div class="overviewcard__info">Card</div>
             </div>-->
         </div>
-        <div class="main-box">
-            <div class="cardoverview">
-
-            </div>
+        <div class="container">
+            <app-products></app-products>
         </div>
     </div>
-    <footer class="footer">
-        <div class="footer__copyright" style="padding: 10px;">&copy; {{currentYear}} </div>
-        <div class="footer__signature">Todos los derechos reservados Adrian's Bakery</div>
-    </footer>
+    <app-footer></app-footer>
 </div>
