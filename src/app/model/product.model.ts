@@ -8,4 +8,5 @@ export class Product{
     img?:string;
     alt_img?:string;
     total?:number;
+    eliminar?:boolean;
 }

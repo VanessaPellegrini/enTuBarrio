@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit {
                         this.dataUser = user;
                         if(user[0].email){
                             this.tipoUser = user[0].tipo;
-                            localStorage.setItem('email', this.userEmail )
+                            localStorage.setItem('email', user[0].email )
                             localStorage.setItem('nombre', user[0].nombre)
                             if(this.tipoUser === 'cliente'){
                                 this._router.navigateByUrl('usuario');
@@ -119,7 +119,6 @@ export class LoginComponent implements OnInit {
                 err => console.log(err);
             })
             .catch(error => {
-                //
                 this._loaderService.display(false);
                 this.openDialog('datosInvalidos');
                 throw error

@@ -15,7 +15,6 @@ import { map } from 'rxjs/operators';
 })
 export class OrdersComponent implements AfterViewChecked, OnInit {
   displayedColumns: string[] = [
-    'id',
     'fecha',
     'nombre_cliente',
     'cant_items',

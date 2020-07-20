@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
 import { OrdersRoutingModule } from './orders-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { OrdersRoutingModule } from './orders-routing.module';
     CommonModule,
     OrdersRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ]
 })
 export class OrdersModule { }

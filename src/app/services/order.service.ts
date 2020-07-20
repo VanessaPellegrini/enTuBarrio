@@ -12,8 +12,8 @@ export class OrderService {
   constructor(private db: AngularFirestore) {
     this.ordersRef = db.collection(this.dbPath);
   }
-  createOrder(order: Order): void {
-    this.ordersRef.add({ ...order })
+  createOrder(order: Order){
+    return this.db.collection(this.dbPath).add(order);
   }
   updateOrder(key: string, value: any): Promise<void> {
     return this.ordersRef.doc(key).update(value)

@@ -33,14 +33,13 @@ export class UserComponent implements OnInit {
     private cartService: CartService
   ) {
     this.userName = localStorage.getItem('nombre');
-    console.log(this.userName);
+    //console.log(this.userName);
 
   }
 
   ngOnInit(): void {
     this.getProductList();
-    console.log(this.products);
-
+    //console.log(this.products);
   }
 
   onSubmit(){
@@ -59,7 +58,6 @@ export class UserComponent implements OnInit {
   }
 
   addCart(){
-    console.log('agregar al carrito');
     this.cartService.addCart(this.products)
     //this.productClicked.emit(this.products.id);
   }

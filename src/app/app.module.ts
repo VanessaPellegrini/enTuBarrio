@@ -14,6 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { LoaderService } from './shared/loader/loader.service';
 import { SharedModule } from './shared/shared.module';
+import { UserService } from './services/user.service';
 
 //loader
 

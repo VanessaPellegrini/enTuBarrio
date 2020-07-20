@@ -19,36 +19,118 @@
 
             </div>
         </div>
-        <div *ngIf="(products$ | async | groupProducts) as products">
-            <p *ngIf="products.length === 0"> no hay productos</p>
-            <div class="row" *ngFor="let product of products">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Nombre:</th>
-                        <th>Descripcion:</th>
-                        <th>Cantidad:</th>
-                        <th>Total:</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td> <img style="width: 150px;" src="{{product.img}}" alt="{{product.alt_img}}"></td>
-                        <td>{{product.nombre}}</td>
-                        <td>{{product.descripcion}}</td>
-                        <td>{{product.cantidad }}</td>
-                        <td>${{product.total}}</td>
-                        <td>
-                            <button mat-icon-button (click)="deleteProduct(product)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    
-                    <th></th>
-                </table>
-            </div>
+        <mat-horizontal-stepper #stepper *ngIf="(products$ | async ) as products">
+            <mat-step>
+                <ng-template matStepLabel>Tu pedido actual</ng-template>
+                <div>
+                    <p *ngIf="products.length === 0"> no hay productos</p>
+                    <div class="row" *ngFor="let product of products">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>Nombre:</th>
+                                <th>Descripcion:</th>
+                                <th>Cantidad:</th>
+                                <th>Precio unitario:</th>
+                            </tr>
+                            <tr>
+                                <td> <img style="width: 150px;" src="{{product.img}}" alt="{{product.alt_img}}">
+                                </td>
+                                <td>{{product.nombre}}</td>
+                                <td>{{product.descripcion}}</td>
+                                <td>{{product.cantidad}}</td>
+                                <td>${{product.precio}}</td>
+                                <td>
+                                    <button mat-icon-button (click)="deleteProduct(product)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <table *ngIf="products.length !== 0">
+                        <tr>
+                            <th>Total:</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>${{total}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <mat-divider></mat-divider>
+                <div>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <!-- TODO AGREGAR INPUT DE DIRECCION EN CASO QUE QUIERA INGRESAR OTRA -->
+                <!-- [formGroup]="userDataOrder" -->
+                <ng-template matStepLabel>Confirma tus datos</ng-template>
+                <div *ngIf="products.length !== 0">
+                    <div *ngFor="let user of userData">
+                        <h2>
+                            <mat-icon></mat-icon> Identificación
+                        </h2>
+                        <div>
+                            <ul>
+                                <li><span>Nombre: </span>{{user?.nombre}}</li>
+                                <li><span>Email: </span>{{user?.email}}</li>
+                                <li><span>Móvil: </span>{{user?.numero}}</li>
+                            </ul>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <h2>
+                            <mat-icon></mat-icon> Entrega
+                        </h2>
+                        <div>
+                            <ul>
+                                <li><span>Dirección: </span>{{user?.direccion}}</li>
+                            </ul>
+                        </div>
 
-        </div>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <!-- <mat-form-field>
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="nombre" placeholder="Ex. 1 Main St, New York, NY" required>
+                    </mat-form-field>                         -->
+                <div>
+                    <button mat-button matStepperPrevious>Volver</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Confirmar pedido</ng-template>
+                <div *ngFor="let user of userData">
+                    <div *ngIf="products.length !== 0">
+                        <h2>
+                            <mat-icon></mat-icon> Resumen
+                        </h2>
+                        <div>
+                            <ul>
+                                <li><span>Nombre: </span>{{user?.nombre}}</li>
+                                <li><span>Dirección: </span>{{user?.direccion}}</li>
+                                <li><span>Total:</span> :${{total}}</li>
+                                <li>
+                                    <button mat-flat-button color="primary"
+                                        (click)="orderConfirmation()">Confirmar</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <mat-divider></mat-divider>
+                <div>
+                    <button mat-button matStepperPrevious>volver</button>
+                    <button mat-button (click)="stepper.reset()">Volver a pedir</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+
     </div>
     <app-footer></app-footer>
 </div>

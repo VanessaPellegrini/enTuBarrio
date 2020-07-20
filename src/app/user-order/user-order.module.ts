@@ -6,6 +6,7 @@ import {UserOrderComponent} from './user-order/user-order.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { MaterialModule } from '../material/material.module';
     UserOrderRoutingModule,
     RouterModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UserOrderModule { }
