@@ -48,15 +48,6 @@
                             </tr>
                         </table>
                     </div>
-                    <table *ngIf="products.length !== 0">
-                        <tr>
-                            <th>Total:</th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>${{total}}</td>
-                        </tr>
-                    </table>
                 </div>
                 <mat-divider></mat-divider>
                 <div>
@@ -98,7 +89,7 @@
                     </mat-form-field>                         -->
                 <div>
                     <button mat-button matStepperPrevious>Volver</button>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <button mat-button matStepperNext (click)="sumarTotal()">Siguiente</button>
                 </div>
             </mat-step>
             <mat-step>
@@ -112,6 +103,7 @@
                             <ul>
                                 <li><span>Nombre: </span>{{user?.nombre}}</li>
                                 <li><span>Dirección: </span>{{user?.direccion}}</li>
+                                <li><span>Cantidad de items: </span> {{cantidad}}</li>
                                 <li><span>Total:</span> :${{total}}</li>
                                 <li>
                                     <button mat-flat-button color="primary"

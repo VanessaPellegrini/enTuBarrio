@@ -17,19 +17,20 @@ import { Users } from 'src/app/model/user.model';
 })
 export class UserOrderComponent implements OnInit, AfterViewChecked {
 
-  products$: Observable <Product[]>;
+  products$: Observable<Product[]>;
   cartData = [];
-  total:number= 0;
+  total: number = 0;
+  cantidad: number = 0;
   userData: Users[] = [];
   emailUser;
-  sendedOrder:boolean;
+  sendedOrder: boolean;
 
   /** user data* */
 
   userName;
   userPhone;
   userAdress;
-  
+
   userDataOrder: FormGroup = new FormGroup({
     tipo: new FormControl('', Validators.required),
     nombreNegocio: new FormControl(''),
@@ -39,48 +40,37 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\\.[a-zA-Z]{2,4}$')])
   });
 
-  constructor( private cartService: CartService,
+  constructor(private cartService: CartService,
     private ref: ChangeDetectorRef,
     private _formBuilder: FormBuilder,
-    private _userService:UserService,
-    private _order:OrderService
-    ) {
-      this.emailUser = localStorage.getItem('email');
-   }
+    private _userService: UserService,
+    private _order: OrderService
+  ) {
+    this.emailUser = localStorage.getItem('email');
+  }
 
   ngOnInit(): void {
-    //TODO arreglar la suma de productos
     this.products$ = this.cartService.cart$;
-    this.products$.subscribe(data =>{
-      //console.log(data)
-      this.cartData = data;
-      data.forEach (item => {
-        this.total += item.precio;
-      })
-      console.log(this.total);
-      
-    });
-    //this.ref.detach();
     this.ref.detectChanges();
     this.getUserData();
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
   }
 
-  deleteProduct(product:Product){
+  deleteProduct(product: Product) {
     this.cartService.deleteCart(product);
   }
 
-  getUserData(){
+  getUserData() {
     this._userService.getDataUser().snapshotChanges().pipe(
-      map(changes => 
+      map(changes =>
         changes.map(
-          c => ({key: c.payload.doc.id, ...c.payload.doc.data() })
+          c => ({ key: c.payload.doc.id, ...c.payload.doc.data() })
         ))
     ).subscribe(user => {
       this.userData = user;
-      this.userData.forEach( user => {
+      this.userData.forEach(user => {
         this.userName = user.nombre;
         this.userAdress = user.direccion;
         this.userPhone = user.numero;
@@ -88,19 +78,19 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     })
   }
 
-  orderConfirmation(){
-    let orderItem:number = 0;
-    let orderTotal:number = 0;
+  orderConfirmation() {
+    let orderItem: number = 0;
+    let orderTotal: number = 0;
     this.cartData.forEach(dataItemCart => {
       console.log(dataItemCart.cantidad);
       console.log(dataItemCart.precio);
-      
-      
       orderItem += dataItemCart.cantidad;
-      orderTotal += dataItemCart.precio;
+      this.total += dataItemCart.precio;
     })
+    console.log(this.total);
+
     let order: Order;
-    order = Object.assign({},{
+    order = Object.assign({}, {
       cant_items: orderItem,
       estado_pedido: 'NO ENTREGADO',
       aceptacion: 'NO ACEPTADO',
@@ -108,14 +98,27 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
       nombre_cliente: this.userName,
       telefono_cliente: this.userPhone,
       direccion_cliente: this.userAdress,
-      total: orderTotal,
+      total: this.total,
     })
     this._order.createOrder(order)
-    .then(() => {
-      this.sendedOrder = true;
-    })
-    .catch((err) => {
-      throw err
+      .then(() => {
+        this.sendedOrder = true;
+      })
+      .catch((err) => {
+        throw err
+      });
+  }
+
+  sumarTotal(){
+    this.products$.subscribe(data => {
+      //console.log(data)
+      this.cartData = data;
+      data.forEach(el => {
+        this.total += el.precio;
+        console.log(el.total);
+        
+        this.cantidad += el.cantidad;
+      })
     });
   }
 
