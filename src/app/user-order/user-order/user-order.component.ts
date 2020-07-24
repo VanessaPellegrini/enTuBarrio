@@ -19,6 +19,7 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
 
   products$: Observable<Product[]>;
   cartData = [];
+  
   total: number = 0;
   cantidad: number = 0;
   userData: Users[] = [];
@@ -26,7 +27,6 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
   sendedOrder: boolean;
 
   /** user data* */
-
   userName;
   userPhone;
   userAdress;
@@ -53,6 +53,10 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     this.products$ = this.cartService.cart$;
     this.ref.detectChanges();
     this.getUserData();
+    this.products$.subscribe(data => {
+      //console.log(data)
+      this.cartData = data;
+    });
   }
 
   ngAfterViewChecked() {
@@ -85,10 +89,8 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
       console.log(dataItemCart.cantidad);
       console.log(dataItemCart.precio);
       orderItem += dataItemCart.cantidad;
-      this.total += dataItemCart.precio;
+      orderTotal += dataItemCart.precio;
     })
-    console.log(this.total);
-
     let order: Order;
     order = Object.assign({}, {
       cant_items: orderItem,
@@ -98,7 +100,7 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
       nombre_cliente: this.userName,
       telefono_cliente: this.userPhone,
       direccion_cliente: this.userAdress,
-      total: this.total,
+      total: orderTotal,
     })
     this._order.createOrder(order)
       .then(() => {
@@ -110,15 +112,19 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
   }
 
   sumarTotal(){
+    let arr = [];
+    let precio = 0;
+    let cantidad = 0;
+    this.total = 0;
+    this.cantidad = 0;
     this.products$.subscribe(data => {
-      //console.log(data)
-      this.cartData = data;
-      data.forEach(el => {
-        this.total += el.precio;
-        console.log(el.total);
-        
-        this.cantidad += el.cantidad;
+      arr = data;
+      arr.forEach(el => {
+        precio += el.precio;
+        cantidad += el.cantidad;
       })
+      this.total = precio;
+      this.cantidad = cantidad;
     });
   }
 

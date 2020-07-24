@@ -23,11 +23,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
   ],
   exports: [
+    MatSlideToggleModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,

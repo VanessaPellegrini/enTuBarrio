@@ -21,13 +21,13 @@
                 <div class="flex">
 
                     <mat-form-field appearance="outline">
-                        <mat-icon matSuffix appearance="outline">email</mat-icon>
+                        <mat-icon color="primary" matSuffix appearance="outline">email</mat-icon>
                         <input autocomplete="off" class="email" name="email" type="text" matInput
                             placeholder="ejemplo@ejemplo.cl" formControlName="email">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
-                        <mat-icon (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-icon color="primary" (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <input placeholder="********" name="password" autocomplete="off"
                             [type]="hide ? 'password' : 'text'" matInput formControlName="password">
                     </mat-form-field>

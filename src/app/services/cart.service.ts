@@ -26,7 +26,6 @@ export class CartService {
     const i = this.products.indexOf(product);
     this.products.splice(i,1);
     this.cartAdd.next(this.products);
-    console.log(this.products);
   }
 
 }

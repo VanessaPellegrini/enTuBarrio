@@ -1,5 +1,6 @@
+<app-user-header></app-user-header>
 <div class="grid-container">
-    <app-user-header></app-user-header>
+    <header></header>
     <div class="main">
         <div class="main-header">
             <!-- 
@@ -23,34 +24,40 @@
             <mat-step>
                 <ng-template matStepLabel>Tu pedido actual</ng-template>
                 <div>
-                    <p *ngIf="products.length === 0"> no hay productos</p>
-                    <div class="row" *ngFor="let product of products">
-                        <table>
-                            <tr>
-                                <th></th>
-                                <th>Nombre:</th>
-                                <th>Descripcion:</th>
-                                <th>Cantidad:</th>
-                                <th>Precio unitario:</th>
-                            </tr>
-                            <tr>
-                                <td> <img style="width: 150px;" src="{{product.img}}" alt="{{product.alt_img}}">
-                                </td>
-                                <td>{{product.nombre}}</td>
-                                <td>{{product.descripcion}}</td>
-                                <td>{{product.cantidad}}</td>
-                                <td>${{product.precio}}</td>
-                                <td>
-                                    <button mat-icon-button (click)="deleteProduct(product)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
+                    <p *ngIf="products.length === 0"> Todavía no has agregado productos.</p>
+                    <div style="display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column; ">
+                        <div class="row" *ngFor="let product of products" style="max-width: 950px;">
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th>Nombre:</th>
+                                    <th>Descripcion:</th>
+                                    <th>Cantidad:</th>
+                                    <th>Precio unitario:</th>
+                                </tr>
+                                <tr>
+                                    <td> <img style="width: 150px;" src="{{product.img}}" alt="{{product.alt_img}}">
+                                    </td>
+                                    <td>{{product.nombre}}</td>
+                                    <td>{{product.descripcion}}</td>
+                                    <td>{{product.cantidad}}</td>
+                                    <td>${{product.precio}}</td>
+                                    <td>
+                                        <button mat-icon-button (click)="deleteProduct(product)">
+                                            <mat-icon color="warn">delete</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
                 <mat-divider></mat-divider>
-                <div>
+                <div style="display: flex;justify-content: flex-end;">
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </mat-step>
@@ -59,25 +66,27 @@
                 <!-- [formGroup]="userDataOrder" -->
                 <ng-template matStepLabel>Confirma tus datos</ng-template>
                 <div *ngIf="products.length !== 0">
+                    <!--  *ngIf="products.length !== 0" -->
                     <div *ngFor="let user of userData">
                         <h2>
-                            <mat-icon></mat-icon> Identificación
+                            <mat-icon color="accent">person_pin</mat-icon> Identificación
                         </h2>
-                        <div>
-                            <ul>
-                                <li><span>Nombre: </span>{{user?.nombre}}</li>
-                                <li><span>Email: </span>{{user?.email}}</li>
-                                <li><span>Móvil: </span>{{user?.numero}}</li>
-                            </ul>
-                        </div>
                         <mat-divider></mat-divider>
+                        <div style="padding: 30px;">
+                            <p class="bold"><span class="light">Nombre: </span>{{user?.nombre}}</p>
+                            <p class="bold"><span class="light">Email: </span>{{user?.email}}</p>
+                            <p class="bold"><span class="light">Móvil: </span>{{user?.numero}}</p>
+
+                        </div>
+
                         <h2>
-                            <mat-icon></mat-icon> Entrega
+                            <mat-icon color="accent">place</mat-icon> Entrega
                         </h2>
-                        <div>
-                            <ul>
-                                <li><span>Dirección: </span>{{user?.direccion}}</li>
-                            </ul>
+                        <mat-divider></mat-divider>
+                        <div style="padding: 30px;">
+
+                            <p class="bold"><span class="light">Dirección: </span>{{user?.direccion}}</p>
+
                         </div>
 
                     </div>
@@ -87,9 +96,9 @@
                         <mat-label>Address</mat-label>
                         <input matInput formControlName="nombre" placeholder="Ex. 1 Main St, New York, NY" required>
                     </mat-form-field>                         -->
-                <div>
+                <div style="display: flex;justify-content: space-between;">
                     <button mat-button matStepperPrevious>Volver</button>
-                    <button mat-button matStepperNext (click)="sumarTotal()">Siguiente</button>
+                    <button mat-button matStepperNext (click)="sumarTotal()">Confirmar datos</button>
                 </div>
             </mat-step>
             <mat-step>
@@ -97,32 +106,31 @@
                 <div *ngFor="let user of userData">
                     <div *ngIf="products.length !== 0">
                         <h2>
-                            <mat-icon></mat-icon> Resumen
+                            <mat-icon color="accent">point_of_sale</mat-icon> Resumen
                         </h2>
-                        <div>
-                            <ul>
-                                <li><span>Nombre: </span>{{user?.nombre}}</li>
-                                <li><span>Dirección: </span>{{user?.direccion}}</li>
-                                <li><span>Cantidad de items: </span> {{cantidad}}</li>
-                                <li><span>Total:</span> :${{total}}</li>
-                                <li>
-                                    <button mat-flat-button color="primary"
-                                        (click)="orderConfirmation()">Confirmar</button>
-                                </li>
-                            </ul>
+                        <mat-divider></mat-divider>
+                        <div style="padding: 30px;">
+                            <p><span class="light">Nombre: </span>{{user?.nombre}}</p>
+                            <p><span class="light">Dirección: </span>{{user?.direccion}}</p>
+                            <p><span class="light">Cantidad de items: </span> {{cantidad}}</p>
+                            <p><span class="light">Total:</span> :${{total}}</p>
+                            <div>
+                                <button mat-flat-button color="primary" (click)="orderConfirmation()">Confirmar</button>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
                 <mat-divider></mat-divider>
-                <div>
-                    <button mat-button matStepperPrevious>volver</button>
+                <div style="display: flex;justify-content: flex-end;">
                     <button mat-button (click)="stepper.reset()">Volver a pedir</button>
                 </div>
             </mat-step>
         </mat-horizontal-stepper>
 
     </div>
-    <app-footer></app-footer>
+    <footer class="footer">
+        <app-footer></app-footer>
+    </footer>
 </div>

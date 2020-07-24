@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,9 @@ import { RouterModule } from '@angular/router';
     OrdersRoutingModule,
     SharedModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class OrdersModule { }

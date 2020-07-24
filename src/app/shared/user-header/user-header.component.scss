@@ -1,1 +1,17 @@
 /*header main*/
+
+::ng-deep .mat-toolbar.mat-primary {
+    background: #612012!important;
+    color: white;
+}
+
+::ng-deep mat-toolbar.mat-toolbar.mat-primary.mat-toolbar-single-row {
+display: flex;
+justify-content: space-between;
+div{
+    padding:0 30px;
+    button{
+    padding: 5px;
+    }
+}
+}

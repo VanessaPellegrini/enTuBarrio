@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Order } from '../model/order.mode';
 import { OrderService } from '../services/order.service';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -26,14 +27,30 @@ export class OrdersComponent implements AfterViewChecked, OnInit {
   orderStatus = 'ACEPTADO';
   orders;
 
+  //form
+
+  isChecked = true;
+  formGroup: FormGroup;
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private firestore: AngularFirestore,
     private cdRef: ChangeDetectorRef,
-    private orderService: OrderService
-  ) { }
+    private orderService: OrderService,
+    formBuilder: FormBuilder
+  ) { 
+    this.formGroup = formBuilder.group({
+      enableWifi: '',
+      acceptTerms: ['', Validators.requiredTrue]
+    });
+  }
+
+
+  onFormSubmit() {
+    alert(JSON.stringify(this.formGroup.value, null, 2));
+  }
 
   ngAfterViewChecked() {
     this.firestore.collection<any>('pedidos', ref => ref
@@ -52,6 +69,10 @@ export class OrdersComponent implements AfterViewChecked, OnInit {
     this.getOrderList();
     console.log(this.orders);
 
+  }
+  log(){
+    console.log('holi');
+    
   }
 
   getOrderList() {
