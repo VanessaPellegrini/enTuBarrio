@@ -5,22 +5,16 @@ import { Order } from '../model/order.model';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService {
-  private dbPath = '/pedidos';
+export class HistoricalService {
+  private dbPath = '/historial';
   ordersRef: AngularFirestoreCollection<Order> = null;
 
   constructor(private db: AngularFirestore) {
     this.ordersRef = db.collection(this.dbPath);
   }
+  
   createOrder(order: Order){
     return this.db.collection(this.dbPath).add(order);
-  }
-  updateOrder(key: string, value: any): Promise<void> {
-    return this.ordersRef.doc(key).update(value)
-  }
-
-  deleteOrder(key: string): Promise<void> {
-    return this.ordersRef.doc(key).delete();
   }
 
   getOrderList(): AngularFirestoreCollection<Order> {

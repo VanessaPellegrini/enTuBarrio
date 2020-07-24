@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { map } from 'rxjs/operators';
-import { Order } from 'src/app/model/order.mode';
+import { Order } from 'src/app/model/order.model';
 import * as firebase from 'firebase/app';
 import { OrderService } from 'src/app/services/order.service';
 import { Users } from 'src/app/model/user.model';
@@ -24,7 +24,7 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
   cantidad: number = 0;
   userData: Users[] = [];
   emailUser;
-  sendedOrder: boolean;
+  sendedOrder: boolean = false;
 
   /** user data* */
   userName;
@@ -86,16 +86,12 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     let orderItem: number = 0;
     let orderTotal: number = 0;
     this.cartData.forEach(dataItemCart => {
-      console.log(dataItemCart.cantidad);
-      console.log(dataItemCart.precio);
       orderItem += dataItemCart.cantidad;
       orderTotal += dataItemCart.precio;
     })
     let order: Order;
     order = Object.assign({}, {
       cant_items: orderItem,
-      estado_pedido: 'NO ENTREGADO',
-      aceptacion: 'NO ACEPTADO',
       fecha: firebase.firestore.FieldValue.serverTimestamp(),
       nombre_cliente: this.userName,
       telefono_cliente: this.userPhone,
@@ -105,6 +101,7 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     this._order.createOrder(order)
       .then(() => {
         this.sendedOrder = true;
+        //TODO resetear carrito
       })
       .catch((err) => {
         throw err

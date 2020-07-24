@@ -104,22 +104,24 @@
             <mat-step>
                 <ng-template matStepLabel>Confirmar pedido</ng-template>
                 <div *ngFor="let user of userData">
-                    <div *ngIf="products.length !== 0">
+                    <div *ngIf="products.length !== 0 && !sendedOrder">
                         <h2>
                             <mat-icon color="accent">point_of_sale</mat-icon> Resumen
                         </h2>
                         <mat-divider></mat-divider>
                         <div style="padding: 30px;">
-                            <p><span class="light">Nombre: </span>{{user?.nombre}}</p>
-                            <p><span class="light">Dirección: </span>{{user?.direccion}}</p>
-                            <p><span class="light">Cantidad de items: </span> {{cantidad}}</p>
-                            <p><span class="light">Total:</span> :${{total}}</p>
+                            <p class="bold"><span class="light">Nombre: </span>{{user?.nombre}}</p>
+                            <p class="bold"><span class="light">Dirección: </span>{{user?.direccion}}</p>
+                            <p class="bold"><span class="light">Cantidad de items: </span> {{cantidad}}</p>
+                            <p class="bold"><span class="light">Total:</span> :${{total}}</p>
                             <div>
                                 <button mat-flat-button color="primary" (click)="orderConfirmation()">Confirmar</button>
                             </div>
                         </div>
                     </div>
-
+                    <div *ngIf="sendedOrder">
+                        <p>El pedido se ha enviado correctamente!</p>
+                    </div>
                 </div>
 
                 <mat-divider></mat-divider>

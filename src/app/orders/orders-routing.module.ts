@@ -6,7 +6,6 @@ import { OrdersComponent } from './orders.component';
 const routes: Routes = [
   {
     path: '',component: OrdersComponent
-      //{ path: '',   redirectTo: '/ordenes', pathMatch: 'full' },
   }
 ];
 

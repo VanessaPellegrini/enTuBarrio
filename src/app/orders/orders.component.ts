@@ -1,12 +1,12 @@
 import { Component, ViewChild, ChangeDetectorRef, AfterViewChecked, OnInit } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Order } from '../model/order.mode';
+import { Order } from '../model/order.model';
 import { OrderService } from '../services/order.service';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { HistoricalService } from '../services/historical.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 
 @Component({
@@ -15,95 +15,82 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements AfterViewChecked, OnInit {
-  displayedColumns: string[] = [
-    'fecha',
-    'nombre_cliente',
-    'cant_items',
-    'total',
-    'aceptacion',
-    'estado_pedido'
-  ];
-  dataSource: MatTableDataSource<Order>;
-  orderStatus = 'ACEPTADO';
-  orders;
 
-  //form
-
-  isChecked = true;
+  orders: any;
   formGroup: FormGroup;
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  pedidoAceptado: boolean;
 
   constructor(
-    private firestore: AngularFirestore,
-    private cdRef: ChangeDetectorRef,
-    private orderService: OrderService,
-    formBuilder: FormBuilder
-  ) { 
-    this.formGroup = formBuilder.group({
-      enableWifi: '',
-      acceptTerms: ['', Validators.requiredTrue]
-    });
-  }
-
-
-  onFormSubmit() {
-    alert(JSON.stringify(this.formGroup.value, null, 2));
+    private _orderService: OrderService,
+    private _historical: HistoricalService,
+    public dialog: MatDialog,) {
   }
 
   ngAfterViewChecked() {
-    this.firestore.collection<any>('pedidos', ref => ref
-      .where('estado_pedido', '==', 'NO ENTREGADO')
-    ).valueChanges().subscribe(
-      orderData => {
-        this.dataSource = new MatTableDataSource(orderData);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      }
-    )
-    this.cdRef.detectChanges();
   }
 
   ngOnInit() {
-    this.getOrderList();
-    console.log(this.orders);
-
+    this.getProductList();
   }
-  log(){
-    console.log('holi');
-    
-  }
-
-  getOrderList() {
-    this.orderService.getOrderList().snapshotChanges().pipe(
+  getProductList() {
+    this._orderService.getOrderList().snapshotChanges().pipe(
       map(changes =>
         changes.map(
-          c => ({
-            key: c.payload.doc.id,
-            ...c.payload.doc.data()
-          })
-        )
-      )
-    ).subscribe(
-      order => {
-        this.orders = order;
-      }
-    )
+          c => ({ key: c.payload.doc.id, ...c.payload.doc.data() })
+        ))
+    ).subscribe(orders => {
+      this.orders = orders;
+    })
   }
 
-  deleteOrder() {
-    //this.orderService.deleteOrder()
+  deleteProduct() {
+    this._orderService.deleteOrder(this.orders[0].key)
+    .then(()=>{
+      this.openDialog('eliminar');
+    })
+      .catch(err => console.log(err));
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  aceptado() {
+    this.pedidoAceptado = true;
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  enviado() {
+    let statusSended = {estado:'ENTREGADO'}
+    let newHistoricalOrder = Object.assign({...statusSended,...this.orders[0]})
+
+    this._historical.createOrder(newHistoricalOrder)
+      .then(() => {
+        this.openDialog('enviado');
+      })
+      .then(() => {
+        this._orderService.deleteOrder(this.orders[0].key)
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+  }
+
+  openDialog(type: string) {
+    let dataModal;
+
+    switch (type) {
+      case 'enviado':
+        dataModal = { title: "Pedido Enviado!", message: "Podrás encontrar la información de tu pedido en el historial", icon: 'local_shipping', colorIcon: 'primary' }
+        break;
+      case 'eliminar':
+        dataModal = { title: "El pedido ha sido eliminado", message: "No podrás volver atrás esta acción", icon: 'delete_sweep', colorIcon: 'warn' }
+        break;
+
+      default:
+        break;
     }
+
+    this.dialog.open(ModalComponent, {
+      width: '250px',
+      data: dataModal
+    });
   }
+
 }
 
 

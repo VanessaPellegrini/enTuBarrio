@@ -3,17 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AngularFirestore } from '@angular/fire/firestore';
-
-export interface Pedido {
-  id?: number;
-  cant_items?: number;
-  estado_pedido?: string;
-  fecha?: Date;
-  nombre_cliente?: string;
-  telefono_cliente?: string;
-  total?: number;
-  aceptacion?:string;
-}
+import { Order } from '../model/order.model';
 
 @Component({
   selector: 'app-historical',
@@ -23,15 +13,13 @@ export interface Pedido {
 export class HistoricalComponent implements AfterViewChecked {
 
   displayedColumns: string[] = [
-    'id', 
     'fecha', 
     'nombre_cliente', 
     'cant_items', 
     'total',
-    'aceptacion',
     'estado_pedido'
   ];
-  dataSource: MatTableDataSource<Pedido>;
+  dataSource: MatTableDataSource<Order>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -41,8 +29,7 @@ export class HistoricalComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.firestore.collection<any>('pedidos', ref => ref 
-    .where('estado_pedido', '==', 'ENTREGADO')).valueChanges().subscribe(
+    this.firestore.collection<any>('historial').valueChanges().subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
