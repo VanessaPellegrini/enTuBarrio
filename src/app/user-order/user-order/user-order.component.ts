@@ -19,7 +19,7 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
 
   products$: Observable<Product[]>;
   cartData = [];
-  
+
   total: number = 0;
   cantidad: number = 0;
   userData: Users[] = [];
@@ -100,15 +100,19 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     })
     this._order.createOrder(order)
       .then(() => {
+        this.cartService.resetCart();
+      })
+      .then(() => {
         this.sendedOrder = true;
         //TODO resetear carrito
-      })
+      }) 
+    
       .catch((err) => {
         throw err
       });
   }
 
-  sumarTotal(){
+  sumarTotal() {
     let arr = [];
     let precio = 0;
     let cantidad = 0;
