@@ -100,9 +100,6 @@ export class UserOrderComponent implements OnInit, AfterViewChecked {
     })
     this._order.createOrder(order)
       .then(() => {
-        this.cartService.resetCart();
-      })
-      .then(() => {
         this.sendedOrder = true;
         //TODO resetear carrito
       }) 
