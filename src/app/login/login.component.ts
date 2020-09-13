@@ -107,11 +107,9 @@ export class LoginComponent implements OnInit {
                             this.tipoUser = user[0].tipo;
                             localStorage.setItem('email', user[0].email )
                             localStorage.setItem('nombre', user[0].nombre)
-                            if(this.tipoUser === 'cliente'){
-                                this._router.navigateByUrl('usuario');
-                            }else{
+
                                 this._router.navigateByUrl('pedidos');
-                            }
+ 
                             this._loaderService.display(false);
                         }
                     })
