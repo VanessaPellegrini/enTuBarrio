@@ -5,7 +5,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '', loadChildren: 'src/app/login/login.module#LoginModule' },
+  { path: 'admin', loadChildren: 'src/app/login/login.module#LoginModule' },
   {
     path: 'pedidos',
     loadChildren: () => import(`src/app/orders/orders.module`).then(m => m.OrdersModule),
@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard]
   },
   {
-    path: 'public',
+    path: '',
     loadChildren: () => import(`src/app/user/user.module`).then(m => m.UserModule)
   },
   {

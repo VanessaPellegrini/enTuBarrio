@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { CartService } from 'src/app/services/cart.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-header',
@@ -12,11 +13,13 @@ import { map } from 'rxjs/operators';
 })
 export class UserHeaderComponent implements OnInit {
   total$: Observable<number>;
+  showBack=false;
 
   constructor(
     private _router: Router,
     public auth: AngularFireAuth,
-    private cartService: CartService
+    private cartService: CartService,
+    private location: Location
   ) {
     this.total$ = this.cartService.cart$.pipe(
       map(products => products.length)
@@ -24,6 +27,10 @@ export class UserHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.location.path() === ''){
+      this.showBack = true;
+    }
+     
   }
 
   logOut() {
@@ -35,6 +42,10 @@ export class UserHeaderComponent implements OnInit {
       .catch((err) => {
         throw (err)
       });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

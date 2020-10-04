@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
     <div>
-        <a routerLink="/public" style="margin-right: 20px;" mat-button>
-            Productos
+        <a style="margin-right: 20px;" mat-button (click)="goBack()" *ngIf="!showBack">
+            <mat-icon>keyboard_backspace</mat-icon>
+            Volver
         </a>
     </div>
     <div>

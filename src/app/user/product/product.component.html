@@ -1,21 +1,19 @@
-<mat-card class="example-card">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{product.nombre}}</mat-card-title>
-        <!--   <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
-    </mat-card-header>
-    <!-- img -->
+<mat-card class="example-card z-depth" appMaterialElevation>
+
     <div class="crop-image">
         <img mat-card-image src="{{product.img}}" alt="{{product.alt_img}}">
     </div>
-
+    <mat-divider></mat-divider>
     <mat-card-content>
-        <p>
-            {{product.descripcion}}
-        </p>
+
         <div class="overviewcard__info">
             <h2><span class="bolder">Precio:</span>${{product.precio}}</h2>
         </div>
+        <h2>{{product.nombre}}</h2>
+        <p [ngClass]="showDescription ? 'descriptionAnimation' : 'hideDescription'">
+            {{product.descripcion}}
+        </p>
+
     </mat-card-content>
     <mat-card-actions>
         <!--  <input type="number" name="" id="" formControlName="itemCantidad" min="0" max="{{product.cantidad}}" maxlength="{{product.cantidad}}">-->

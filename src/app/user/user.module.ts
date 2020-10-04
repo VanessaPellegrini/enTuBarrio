@@ -6,6 +6,7 @@ import {UserRoutingModule } from './user-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
+import { MaterialElevationDirective } from '../shared/directives/material-elevation.directive';
 
 
 
@@ -13,7 +14,9 @@ import { ProductsComponent } from './products/products.component';
   declarations: [
     UserRoutingModule.components,
     ProductComponent,
-    ProductsComponent],
+    ProductsComponent,
+    MaterialElevationDirective
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,

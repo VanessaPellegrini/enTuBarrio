@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter, HostListener } from '@angular/core';
 import { Product } from 'src/app/model/product.model';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -9,8 +9,19 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ProductComponent implements OnInit {
 
+  showDescription = false;
+
   @Input() product: Product;
   @Output() productClicked: EventEmitter<any> = new EventEmitter();
+  @HostListener('mouseenter') 
+  onMouseEnter() {
+    this.showDescription=true;
+  }
+
+  @HostListener('mouseleave') 
+  onMouseLeave() {
+    this.showDescription = false;
+  }
 
   constructor(private cartService: CartService) { }
 

@@ -19,7 +19,7 @@ import { GroupProductsPipe } from './pipe/group.pipe';
     LoaderComponent, 
     UserHeaderComponent, 
     FooterComponent,
-    GroupProductsPipe
+    GroupProductsPipe,
   ],
   imports: [
     CommonModule,
