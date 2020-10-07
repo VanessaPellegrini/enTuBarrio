@@ -4,12 +4,12 @@
         <img mat-card-image src="{{product.img}}" alt="{{product.alt_img}}">
     </div>
     <mat-divider></mat-divider>
-    <mat-card-content>
+    <mat-card-content style="padding:24px;margin:0!important;">
 
         <div class="overviewcard__info">
             <h2><span class="bolder">Precio:</span>${{product.precio}}</h2>
         </div>
-        <h2>{{product.nombre}}</h2>
+        <h2 class="title">{{product.nombre}}</h2>
         <p [ngClass]="showDescription ? 'descriptionAnimation' : 'hideDescription'">
             {{product.descripcion}}
         </p>
@@ -17,7 +17,7 @@
     </mat-card-content>
     <mat-card-actions>
         <!--  <input type="number" name="" id="" formControlName="itemCantidad" min="0" max="{{product.cantidad}}" maxlength="{{product.cantidad}}">-->
-        <button mat-raised-button color="accent" type="submit" (click)="addCart()">Agregar al carrito <mat-icon>
+        <button style="border: 2px solid;" mat-stroked-button color="accent" type="submit" (click)="addCart()">Agregar al carrito <mat-icon>
                 shopping_cart</mat-icon>
         </button>
     </mat-card-actions>
