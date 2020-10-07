@@ -35,17 +35,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #612112;
     display: flex;
     justify-content: space-between;
-    color: #f2d7b8;
+    color: #fff;
     align-items: center;
     button{
-        background: #f2d7b8!important;
+        background: #fff!important;
     }
     padding: 0 30px;
 }
 .grid-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 50px 1fr 50px;
+    //grid-template-rows: 50px 1fr 50px;
     grid-template-areas:
         'header'
         'main'

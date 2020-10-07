@@ -5,14 +5,13 @@
 
 // #0D5c75 #199FB1 #A5D1E1
 
-::ng-deep mat-card.mat-card{
-    background: #f2d7b8!important;
-}
-
 .main-box{
     column-count: 1;
     column-gap: 20px;
     margin: 20px;
+}
+.main{
+    background:#141b18;
 }
 
 .card {
@@ -40,7 +39,7 @@
 }
 /*header main*/
 .main-header {
-    background-image: url('../../assets/img/header.svg');
+    background-image: url('../../assets/img/header.png');
     background-size: cover;
     display: flex;
     justify-content: space-between;
